@@ -24,7 +24,6 @@ from app.schemas.user import UserCreate
 async def get_user_db(
     session: AsyncSession = Depends(get_async_session),
 ) -> SQLAlchemyUserDatabase:
-    """Генератор коннектора базы данных для пользователей."""
     yield SQLAlchemyUserDatabase(session, User)
 
 
@@ -66,7 +65,6 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
 
 async def get_user_manager(user_db=Depends(get_user_db)) -> UserManager:
-    """Генератор менеджера пользователей."""
     yield UserManager(user_db)
 
 

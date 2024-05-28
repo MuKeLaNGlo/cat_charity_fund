@@ -11,7 +11,7 @@ async def validate_charity_project_name_duplicate(
     project_name: str,
     session: AsyncSession,
 ) -> None:
-    """Проверяется, существует ли такое имя проекта"""
+    """Проверяется, существует ли такое имя проекта."""
     existing_project = await charity_project_crud.get_project_by_name(
         project_name, session
     )
@@ -26,7 +26,7 @@ async def validate_charity_project_exists(
     project_id: int,
     session: AsyncSession,
 ) -> CharityProject:
-    """Проверяется, существует ли проект с таким id"""
+    """Проверяется, существует ли проект с таким id."""
     project = await charity_project_crud.get(project_id, session)
     if not project:
         raise HTTPException(

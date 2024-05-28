@@ -7,8 +7,6 @@ from app.core.config import settings
 
 
 class PreBase:
-    """Базовый класс для всех моделей, содержащий общие атрибуты."""
-
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()
