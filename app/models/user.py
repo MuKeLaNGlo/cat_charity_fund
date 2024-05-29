@@ -4,4 +4,4 @@ from app.core.db import Base
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    pass
+    """Модель пользователя для БД."""

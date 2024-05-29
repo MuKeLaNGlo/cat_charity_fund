@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     secret: str = 'you-will-never-guess'
 
     class Config:
+        env_prefix = 'CCF_'
         env_file = '.env'
 
 

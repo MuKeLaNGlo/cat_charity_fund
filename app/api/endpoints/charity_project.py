@@ -25,13 +25,13 @@ router = APIRouter()
     '/',
     response_model=List[CharityProjectDB],
     response_model_exclude_none=True,
+    summary='Получить список всех проектов',
 )
 async def get_charity_projects(
     session: AsyncSession = Depends(get_async_session),
 ):
     """Получить список всех проектов."""
-    projects = await charity_project_crud.get_multi(session)
-    return projects
+    return await charity_project_crud.get_multi(session)
 
 
 @router.post(
@@ -39,6 +39,7 @@ async def get_charity_projects(
     response_model=CharityProjectDB,
     response_model_exclude_none=True,
     dependencies=[Depends(current_superuser)],
+    summary='Создание проекта, только суперюзером',
 )
 async def create_charity_project(
     project: CharityProjectCreate,
@@ -55,6 +56,7 @@ async def create_charity_project(
     '/{project_id}',
     response_model=CharityProjectDB,
     dependencies=[Depends(current_superuser)],
+    summary='Редактирование проектов, для суперюзеров',
 )
 async def update_charity_project(
     project_id: int,
@@ -78,11 +80,13 @@ async def update_charity_project(
     '/{project_id}',
     response_model=CharityProjectDB,
     dependencies=[Depends(current_superuser)],
+    summary='Удаление проекта',
 )
 async def delete_charity_project(
     project_id: int,
     session: AsyncSession = Depends(get_async_session),
 ):
+    """Удаление проекта."""
     project = await validate_project_before_delete(project_id, session)
     project = await charity_project_crud.remove(project, session)
     return project
